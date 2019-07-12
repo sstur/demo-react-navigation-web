@@ -1,19 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+
+import createAppContainer from './helpers/createAppContainer';
+import HomeScreen from './screens/Home';
+import LoginScreen from './screens/Login';
+
+const AppNavigator = createStackNavigator(
+  {
+    home: { screen: HomeScreen },
+    login: { screen: LoginScreen },
+  },
+  {
+    initialRouteName: 'home',
+    // NOTE: The following will fix the layout issue on web
+    // cardStyle: { ...StyleSheet.absoluteFillObject },
+  },
+);
+
+let AppContainer = createAppContainer(AppNavigator);
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+  return <AppContainer />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
